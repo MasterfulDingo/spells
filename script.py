@@ -32,5 +32,15 @@ def all_spells():
 
     return render_template('all_spells.html', spells=results)
 
+@app.route('/spell/<path:id>')
+def spell(id):
+    conn = sqlite3.connect('spells.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM spell WHERE id == "{}"'.format(id))
+    results = cur.fetchall()
+
+    return render_template('spell.html', spell=results)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
