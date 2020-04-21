@@ -34,12 +34,17 @@ def all_spells():
 
 @app.route('/spell/<path:id>')
 def spell(id):
+    resultsfinal = 'spell name: {} <br> level: {} concentration: {} ritual: {} components: <br> {} range: {} casting time: {} duration: {} damage: {} <br><br> description: {}'
     conn = sqlite3.connect('spells.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM spell WHERE id == "{}"'.format(id))
-    results = cur.fetchall()
+    #resultsfinal = cur.fetchall()
+    resultscrude = cur.fetchall()
+    resultscrudetuple = resultscrude[0]
+    rcl = list(resultscrudetuple)
 
-    return render_template('spell.html', spell=results)
+    resultsfinal = resultsfinal.format(rcl[1],rcl[3],rcl[4],rcl[5],rcl[6],rcl[8],rcl[10],rcl[9],rcl[7],rcl[2])
+    return render_template('spell.html', spell=resultsfinal)
 
 
 if __name__ == "__main__":
