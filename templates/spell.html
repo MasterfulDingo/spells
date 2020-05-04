@@ -1,8 +1,25 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div id="content">
     <h1> Spell Page </h1>
-
-    <p>{{ spell }}</p>
-
+    <br>
+    <h2>{{ spell[1] }}</h2>
+    A level {{ spell[3] }} {{ spell[11] }}
+    <br>
+    concentration: {{ spell[5] }} ritual: {{ spell[6] }} <br>
+    components: {{ spell[4] }} <br>
+    range: {{ spell[8] }} <br>
+    duration: {{ spell[9] }} <br>
+    casting time: {{ spell[10] }} <br>
+    <br>
+    {{ spell[2] }}
+</div>
 {% endblock content %}
+
+
+
+'spell name: {} <br> level: {} concentration: {} ritual: {} components: {} <br> range: {} casting time: {} 
+duration: {} damage: {} <br><br> description: {}'
+['id','name','description','level','components','concentration','ritual','damage','range','duration',
+'casting time','school']

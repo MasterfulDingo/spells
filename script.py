@@ -2,6 +2,8 @@ import sqlite3
 from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
+entfields = ['id','name','description','level','components','concentration','ritual','damage','range','duration','casting time','school']
+
 posts = [ #context for making context
     {
         'author' : 'lachlan row',
@@ -34,17 +36,14 @@ def all_spells():
 
 @app.route('/spell/<path:id>')
 def spell(id):
-    resultsfinal = 'spell name: {} <br> level: {} concentration: {} ritual: {} components: <br> {} range: {} casting time: {} duration: {} damage: {} <br><br> description: {}'
     conn = sqlite3.connect('spells.db')
     cur = conn.cursor()
-    cur.execute('SELECT * FROM spell WHERE id == "{}"'.format(id))
-    #resultsfinal = cur.fetchall()
-    resultscrude = cur.fetchall()
-    resultscrudetuple = resultscrude[0]
-    rcl = list(resultscrudetuple)
+    cur.execute('SELECT spell.id, spell.name, spell.description, spell.level, spell.components, spell.concentration, spell.ritual, spell.damage, range.name, duration.name, castingtime.name, school.name FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN duration ON duration.id = spell.duration INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN school ON school.id = spell.school WHERE spell.id == "{}"'.format(id))
+    result = cur.fetchall()
+    spell = result[0]
 
-    resultsfinal = resultsfinal.format(rcl[1],rcl[3],rcl[4],rcl[5],rcl[6],rcl[8],rcl[10],rcl[9],rcl[7],rcl[2])
-    return render_template('spell.html', spell=resultsfinal)
+
+    return render_template('spell.html', spell=spell)
 
 
 if __name__ == "__main__":
