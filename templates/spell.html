@@ -2,24 +2,29 @@
 
 {% block content %}
 <div id="content">
-    <h1> Spell Page </h1>
-    <br>
-    <h2>{{ spell[1] }}</h2>
+    <h2>
+        {{ spell[1] }} 
+        {% if spell[6] == 1 %}
+            (ritual)
+        {% endif %}
+    </h2>
     A level {{ spell[3] }} {{ spell[11] }}
     <br>
-    concentration: {{ spell[5] }} ritual: {{ spell[6] }} <br>
     components: {{ spell[4] }} <br>
     range: {{ spell[8] }} <br>
-    duration: {{ spell[9] }} <br>
+    duration: 
+    {% if spell[5] == 1 %}
+        up to 
+    {% endif %}
+    {{ spell[9] }} 
+    {% if spell[5] == 1 %}
+        (concentration)
+    {% endif %}
+    <br>
     casting time: {{ spell[10] }} <br>
     <br>
-    {{ spell[2] }}
+    {% for para in spell[2] %}
+        {{ para }}<br>
+    {% endfor %}
 </div>
 {% endblock content %}
-
-
-
-'spell name: {} <br> level: {} concentration: {} ritual: {} components: {} <br> range: {} casting time: {} 
-duration: {} damage: {} <br><br> description: {}'
-['id','name','description','level','components','concentration','ritual','damage','range','duration',
-'casting time','school']

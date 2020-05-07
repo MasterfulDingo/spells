@@ -29,7 +29,7 @@ def all_spells():
 
     conn = sqlite3.connect('spells.db')
     cur = conn.cursor()
-    cur.execute('SELECT name FROM spell')
+    cur.execute('SELECT id, name FROM spell')
     results = cur.fetchall()
 
     return render_template('all_spells.html', spells=results)
@@ -40,8 +40,9 @@ def spell(id):
     cur = conn.cursor()
     cur.execute('SELECT spell.id, spell.name, spell.description, spell.level, spell.components, spell.concentration, spell.ritual, spell.damage, range.name, duration.name, castingtime.name, school.name FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN duration ON duration.id = spell.duration INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN school ON school.id = spell.school WHERE spell.id == "{}"'.format(id))
     result = cur.fetchall()
-    spell = result[0]
-
+    
+    spell = list(result[0])
+    spell[2] = spell[2].split('\n')
 
     return render_template('spell.html', spell=spell)
 

@@ -1,12 +1,8 @@
 {% extends "layout.html" %}
 #context for content
 {% block content %}
-    <h1> Home Page </h1>
 
-    {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <p>By {{post.author}} on {{post.date}}</p>
-        <p>{{post.content}}</p>
-    {% endfor %}
+    Welcome to the Arcanomicon, my home away from home! My name is Aliban, and i'll be your guide in this extraplanar library of mine. <br>
+    The material you will find here is a collection of every spell I have been able to find, though there are undoubtedly more to be uncovered. You will find an index of spells at the top of the page, and constructs can help you  locate any tomes you want based on characteristics of the spells you are looking, who can cast those spells, and the characteristics of the spells.
 
 {% endblock content %}

@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1> Home Page </h1>
 
     {% for spell in spells %}
-        <h2>{{ spell }}</h2>
+        <a href="spell/{{ spell[0] }}">{{ spell[1] }}</a>
+        <br>
     {% endfor %}
 
 {% endblock content %}
