@@ -1,10 +1,19 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+    
     {% for spell in spells %}
-        <a href="spell/{{ spell[0] }}">{{ spell[1] }}</a>
-        <br>
+        <div class="spelllink">
+            <a href="spell/{{ spell[0] }}">
+                <span class= "asname">{{ spell[1] }}</span>
+                <span class= "aslevel">{{ spell[2] }}</span>
+                <span class= "ascastime">{{ spell[3] }}</span>
+                <span class= "asdurat">{{ spell[4] }}</span>
+                <span class= "asrange">{{ spell[5] }}</span>
+                <span class= "asdmg">{{ spell[6] }}</span>
+            </a>
+        </div>
     {% endfor %}
-
+    
+    
 {% endblock content %}

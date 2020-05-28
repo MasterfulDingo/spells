@@ -4,33 +4,20 @@ app = Flask(__name__)
 
 entfields = ['id','name','description','level','components','concentration','ritual','damage','range','duration','casting time','school']
 
-posts = [ #context for making context
-    {
-        'author' : 'lachlan row',
-        'title' : 'first post',
-        'content' : 'first post content',
-        'date_posted' : 'february 10 2020'
-    },
-    {
-        'author' : 'john doe',
-        'title' : 'second post',
-        'concent' : 'second post concent',
-        'date posted' : 'april 1 2020'
-    }
-]
 
 @app.route("/")
 @app.route("/home")
 def hello():
-    return render_template('home.html', posts=posts)
+    return render_template('home.html')
 
 @app.route('/all_spells')
 def all_spells():
 
     conn = sqlite3.connect('spells.db')
     cur = conn.cursor()
-    cur.execute('SELECT id, name FROM spell')
+    cur.execute('SELECT spell.id, spell.name, spell.level, castingtime.name, duration.name, range.name, spell.damage FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN duration ON duration.id = spell.duration')
     results = cur.fetchall()
+    conn.close()
 
     return render_template('all_spells.html', spells=results)
 
@@ -43,9 +30,13 @@ def spell(id):
     
     spell = list(result[0])
     spell[2] = spell[2].split('\n')
-
+    conn.close()
+    
     return render_template('spell.html', spell=spell)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

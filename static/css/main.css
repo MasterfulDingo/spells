@@ -1,0 +1,127 @@
+.navbar{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+.navbar a{
+    padding: 14px 16px;
+    text-align: center;
+    text-decoration: none;
+    float: left;
+}
+.navbar a:hover{
+    background-color: #B90504;
+}
+.active{
+    background-color: #990100;
+}
+
+.spelllink{
+    margin: 5px;
+
+    overflow: hidden;
+    background-color: #333333;
+    align-self: center;
+    width: 90%;
+    display: block;
+    margin-left: 5%;
+}
+
+.spelllink a{
+    padding: 14px 16px;
+    text-align: left;
+    text-decoration: none;
+    float: left;
+    width: 100%;
+}
+
+.spelllink a:hover{
+    background-color: #B90504;
+}
+
+.asname{
+    position: absolute;
+    width: 17%;
+}
+.aslevel{
+    position: absolute;
+    margin-left: 18%;
+    text-align: center;
+}
+.ascastime{
+    position: absolute;
+    margin-left: 25%;
+    text-align: center;
+}
+.asdurat{
+    position: absolute;
+    margin-left: 37%;
+    text-align: center;
+
+}
+.asrange{
+    position: absolute;
+    margin-left: 52%;
+    text-align: center;
+
+}
+.asdmg{
+    margin-left: 75%;
+    text-align: center;
+
+}
+
+
+
+/*
+.item-a{
+    grid-area: name;
+}
+.item-b{
+    grid-area: level;
+}
+.item-c{
+    grid-area: range;
+}
+.item-d{
+    grid-area: damage;
+}
+.item-e{
+    grid-area: concentration;
+}
+.item-f{
+    grid-area: null;
+    background-color: darkorange;
+}
+.spelllink{
+    display: grid;
+
+    overflow: hidden;
+    background-color: #333333;
+    align-self: center;
+    grid-template-columns: 20% 20px 40px 40px auto;
+    grid-template-rows: 30px, 5px;
+    grid-template-areas: 
+    "name level range damage concentration"
+    "null null null null null";
+}
+*/
+
+
+a:link{
+    color:#F6F6F6;
+}
+a:visited{
+    color:#F6F6F6;
+}
+a:hover{
+    color: #F6F6F6;
+}
+a:active{
+    color: #F6F6F6;
+}
+
