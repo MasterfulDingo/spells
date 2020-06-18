@@ -19,6 +19,20 @@
 .active{
     background-color: #990100;
 }
+.spellfields{
+    margin: 5px;
+    padding: 14px 16px;
+    background-color: #990100;
+    overflow: hidden;
+    align-self: center;
+    width: 90%;
+    display: block;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    color: #F6F6F6;;
+}
 
 .spelllink{
     margin: 5px;

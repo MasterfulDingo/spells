@@ -8,7 +8,13 @@
             (ritual)
         {% endif %}
     </h2>
-    A level {{ spell[3] }} {{ spell[11] }}
+
+    {% if spell[3] == 0 %}
+        A {{ spell[11]}} cantrip
+    {% else %}
+        A level {{ spell[3] }} {{ spell[11] }}
+    {% endif %}
+    
     <br>
     components: {{ spell[4] }} <br>
     range: {{ spell[8] }} <br>

@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    huh
+    <h1>Howdy</h1>
+    <form method="POST" action="/about">
+        <div class="form-group">
+            <input type="text" name="var">
+        </div>
+        <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+    Here's your Howdy: {{ var }}
 {% endblock content %}

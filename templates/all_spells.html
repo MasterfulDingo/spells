@@ -1,7 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    {% for field in entfields %}
+        <select name={{field}}>
+            {% for term in field %}
+                <option value={{field}}>{{term}}</option>
+            {% endfor %}
+        </select>
+    {% endfor %}
     
+    <div class="spellfields">
+        <span class= "asname">Name</span>
+        <span class= "aslevel">Level</span>
+        <span class= "ascastime">Casting time</span>
+        <span class= "asdurat">Duration</span>
+        <span class= "asrange">Range</span>
+        <span class= "asdmg">Damage</span>
+    </div>
     {% for spell in spells %}
         <div class="spelllink">
             <a href="spell/{{ spell[0] }}">
@@ -14,6 +29,4 @@
             </a>
         </div>
     {% endfor %}
-    
-    
 {% endblock content %}
