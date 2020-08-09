@@ -1,6 +1,7 @@
 import sqlite3
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, make_response
 from forms import SpellSearchForm
+import json
 
 #importing the basics
 
@@ -32,20 +33,29 @@ def spell(id):
 
 @app.route('/about', methods=('GET','POST')) #defines methods available to this route 
 def about(): #the function itself
+    sql = "SELECT spell.id, spell.name FROM spell" 
+    spellnames = db_func(sql,single=False) #getting the names of every spell
+    #jsonspells = make_response(jsonpickle.encode(spellnames), 200)
     if request.method == 'POST': #if the method being attempted is 'POST'
         var = request.form['var'] #then var will be the result of the form named 'var'
-
-        return render_template('about.html', var=var) #returns the template, with var defined as whatever the user imput previously.
-
-    return render_template('about.html') #returns the template normally
-
-
         
+        return render_template('about.html', entfields=entfields, var=var, spellnames=json.dumps(spellnames)) #returns the template, with var defined as whatever the user imput previously.
+
+    return render_template('about.html', entfields=entfields, spellnames=spellnames) #returns the template normally
+
+
 def db_func(sql,single):
     conn=sqlite3.connect("spells.db") #connects to database
     cur=conn.cursor() #creates cursor
     cur.execute(sql) #executes the sql command required with the cursor
-    result=cur.fetchone() if single else cur.fetchall() #returns a single tuple if that is all that is required, or a list of tuples if more are needed.
+    if single == True: #returns a single tuple if that is all that is required, and turns it into a list
+        result = cur.fetchone()
+        result = list(result)
+    else: #returns a list of tuples, which are then turned into lists
+        result = cur.fetchall()
+        for i in range(len(result)):
+            result[i-1] = list(result[i-1])
+    #result=cur.fetchone() if single else cur.fetchall() one line function, does not convert tuples to lists
     conn.commit #commits any changes made to the database with the sql.
     conn.close
     return result

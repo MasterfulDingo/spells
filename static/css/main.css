@@ -1,3 +1,5 @@
+
+
 .navbar{
     margin: 0;
     padding: 0;
@@ -61,69 +63,36 @@
     position: absolute;
     width: 17%;
 }
+
 .aslevel{
     position: absolute;
     margin-left: 18%;
     text-align: center;
 }
+
 .ascastime{
     position: absolute;
     margin-left: 25%;
     text-align: center;
 }
+
 .asdurat{
     position: absolute;
     margin-left: 37%;
     text-align: center;
-
 }
+
 .asrange{
     position: absolute;
     margin-left: 52%;
     text-align: center;
-
 }
+
 .asdmg{
     margin-left: 75%;
     text-align: center;
-
 }
 
-
-
-/*
-.item-a{
-    grid-area: name;
-}
-.item-b{
-    grid-area: level;
-}
-.item-c{
-    grid-area: range;
-}
-.item-d{
-    grid-area: damage;
-}
-.item-e{
-    grid-area: concentration;
-}
-.item-f{
-    grid-area: null;
-    background-color: darkorange;
-}
-.spelllink{
-    display: grid;
-
-    overflow: hidden;
-    background-color: #333333;
-    align-self: center;
-    grid-template-columns: 20% 20px 40px 40px auto;
-    grid-template-rows: 30px, 5px;
-    grid-template-areas: 
-    "name level range damage concentration"
-    "null null null null null";
-}
-*/
 
 
 a:link{
