@@ -35,13 +35,18 @@ def spell(id):
 def about(): #the function itself
     sql = "SELECT spell.id, spell.name FROM spell" 
     spellnames = db_func(sql,single=False) #getting the names of every spell
-    #jsonspells = make_response(jsonpickle.encode(spellnames), 200)
     if request.method == 'POST': #if the method being attempted is 'POST'
         var = request.form['var'] #then var will be the result of the form named 'var'
         
-        return render_template('about.html', entfields=entfields, var=var, spellnames=json.dumps(spellnames)) #returns the template, with var defined as whatever the user imput previously.
+        return render_template('about.html', entfields=entfields, var=var, spellnames=spellnames) #returns the template, with var defined as whatever the user imput previously.
 
     return render_template('about.html', entfields=entfields, spellnames=spellnames) #returns the template normally
+
+@app.route('/search')
+def search():
+    sql = "SELECT spell.id, spell.name FROM spell" 
+    spellnames = db_func(sql,single=False)
+    return render_template('search.html', entfields = entfields, spellnames = spellnames)
 
 
 def db_func(sql,single):

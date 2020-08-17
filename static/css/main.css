@@ -36,6 +36,26 @@
     color: #F6F6F6;;
 }
 
+.spell{
+    margin: 5px;
+    overflow: hidden;
+    background-color: #333333;
+    align-self: center;
+    width: 90%;
+    display: block;
+    margin-left: 5%;
+}
+.spell a{
+    padding: 14px 16px;
+    text-align: left;
+    text-decoration: none;
+    float: left;
+    width: 100%;
+}
+.spell a:hover{
+    background-color: #B90504;
+}
+
 .spelllink{
     margin: 5px;
 

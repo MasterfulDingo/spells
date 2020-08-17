@@ -2,8 +2,9 @@
 
 {% block content %}
     {% for field in entfields %}
-        <select name={{field}}>
-            {% for term in field %}
+        <select name={{field}} id="spellselect" method="POST" action="/about" onselect="filterfunc()">
+            <option value={{field[0]}} selected>{{field[0]}}</option>
+            {% for term in field[1:] %}
                 <option value={{field}}>{{term}}</option>
             {% endfor %}
         </select>
@@ -29,4 +30,13 @@
             </a>
         </div>
     {% endfor %}
+
+<script>
+    function filterfunc() {
+        document.getElementById("spellselect").selectedindex = "1";
+    }
+
+
+</script>
+
 {% endblock content %}

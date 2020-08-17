@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <meta>
+
     <h1>Howdy</h1>
     <form method="POST" action="/about">
         <div class="form-group">
-            <input type="text" name="var" onkeypress="innames">
+            <input type="text" name="var">
         </div>
         <input class="btn btn-primary" type="submit" value="submit">
     </form>
@@ -15,6 +15,15 @@
     Here's your Howdy: {{ var }}
     <br>
 
+    <select id="select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
+    <br>
     <p id="test">test</p>
 
     <br>
@@ -27,41 +36,6 @@
             {% endfor %}
         </select>
     {% endfor %}
-
-    <br>
-  
-    <input type="text" id="myInput" onkeyup="autofilter()" placeholder="Search for spells...">
-    
-    <br>
-
-    <div id="spells">
-    {% for name in spellnames %}
-        <div class=spell>{{name[1]}}</div>
-    {% endfor %}
-    </div>
-
-
-    <script>
-
-    function autofilter() {
-        var input, filter, spellsraw, spells, spell, i, txtValue
-        input = document.getElementById('myInput');
-        filter = input.value.toUpperCase();
-        spellsraw = document.getElementById("spells")
-        spells = spellsraw.getElementsByClassName("spell")
-        for (i = 0; i < spells.length; i++ ){
-            spell = spells[i]
-            txtvalue = spell.innerHTML
-            if (txtvalue.toUpperCase().indexOf(filter) > -1){
-                spells[i].style.display = "";    
-            } else {
-                spells[i].style.display = "none";
-            }
-        }
-    }
-
-
-    </script>
 
 
 {% endblock content %}

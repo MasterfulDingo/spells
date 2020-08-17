@@ -1,5 +1,35 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <p>bruhhhhhhhh moment</p>
+
+    <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells...">
+
+    <div id="spells">
+    {% for name in spellnames %}
+        <div class=spell>
+            <a href="spell/{{name[0]}}">{{name[1]}}</a>
+        </div>
+    {% endfor %}
+    </div>
+
+    <script>
+
+        function searchfilter() {
+            var input, filter, spellsraw, spells, spell, i, txtValue //defining variables
+            input = document.getElementById('myInput'); //taking the input from the search bar
+            filter = input.value.toUpperCase(); //making the intput case insensitive
+            spellsraw = document.getElementById("spells") //getting information from the wanted div
+            spells = spellsraw.getElementsByClassName("spell") //extracting contents, shoving them into a 'list'
+            for (i = 0; i < spells.length; i++ ){ //looping through the list of contents
+                spell = spells[i] //picking out the data for each iteration
+                txtvalue = spell.innerHTML //getting the actual text from the div
+                if (txtvalue.toUpperCase().indexOf(filter) > -1){ //if the filter string exists in the div text,
+                    spells[i].style.display = ""; //let the div be
+                } else { //if not,
+                    spells[i].style.display = "none"; //hide it from sight!
+                }
+            }
+        } //ooh curly closing brackets! why did i decide to use Javascript again?
+    
+        </script>
 {% endblock content %}
