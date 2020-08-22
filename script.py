@@ -27,7 +27,9 @@ def all_spells():
 def spell(id):
     sql = "SELECT spell.id, spell.name, spell.description, spell.level, spell.components, spell.concentration, spell.ritual, spell.damage, range.name, duration.name, castingtime.name, school.name FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN duration ON duration.id = spell.duration INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN school ON school.id = spell.school WHERE spell.id == {}".format(id) #the sql query, complete with joins. the format inserts the id of the spell in the database, and therefore returns all relevant information about it for the page.
     single = True #only want one result
-    spell = list(db_func(sql,single)) #runs the sql command, and turns the resultant tuple into a list to allow later formatting
+    spell = db_func(sql,single) #runs the sql command, and turns the resultant tuple into a list to allow later formatting
+    if spell == False:
+        return render_template('404.html'), 404 #if the data is not in the database, the page cannot be created, so return 404 error
     spell[2] = spell[2].split('\n') #splits up the description by python spaces, so it can be properly formatted with flask, as the python was not being picked up by the html side.
     return render_template('spell.html', spell=spell) #passes data through to flask template and magic happens
 
@@ -48,19 +50,26 @@ def search():
     spellnames = db_func(sql,single=False)
     return render_template('search.html', entfields = entfields, spellnames = spellnames)
 
+@app.errorhandler(404) #note that I have explicitly stated that this route is related to the 404 error, and i am using the errorhandler function, not the route function
+def page_not_found(e):
+    return render_template('404.html'), 404 #returns the error page
 
 def db_func(sql,single):
     conn=sqlite3.connect("spells.db") #connects to database
     cur=conn.cursor() #creates cursor
     cur.execute(sql) #executes the sql command required with the cursor
-    if single == True: #returns a single tuple if that is all that is required, and turns it into a list
-        result = cur.fetchone()
-        result = list(result)
-    else: #returns a list of tuples, which are then turned into lists
-        result = cur.fetchall()
-        for i in range(len(result)):
-            result[i-1] = list(result[i-1])
-    #result=cur.fetchone() if single else cur.fetchall() one line function, does not convert tuples to lists
+    try: #if the data called for is not in the database, an error will occur ("Nonetype" is not iterable). this try/except statement catches the error when it is throw up, and returns a "false" so the original function can return a 404 errorpage.
+        if single == True: #returns a single tuple if that is all that is required, and turns it into a list
+            result = cur.fetchone()
+            result = list(result)
+        else: #returns a list of tuples, which are then turned into lists
+            result = cur.fetchall()
+            for i in range(len(result)):
+                result[i-1] = list(result[i-1])
+        #result=cur.fetchone() if single else cur.fetchall() one line function, does not convert tuples to lists
+    except:
+        return False
+    
     conn.commit #commits any changes made to the database with the sql.
     conn.close
     return result
