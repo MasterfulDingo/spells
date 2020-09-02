@@ -3,11 +3,30 @@
 {% block content %}
 
     <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells...">
+    <form method="POST" action="/search">
+        {% for field in entfields %}
+            <p>{{ field[0] }}</p>
+            {% for term in field[1:] %}
+                <input type="checkbox" name="param" value="{{field[0]}}_{{term}}">
+                <label for={{term}}>{{ term }}</label>
+            {% endfor %}
+        {% endfor %}
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    {{ var }}
 
     <div id="spells">
-    {% for name in spellnames %}
-        <div class=spell>
-            <a href="spell/{{name[0]}}">{{name[1]}}</a>
+    {% for spell in spells %}
+        <div class="spelllink">
+            <a href="spell/{{ spell[0] }}">
+                <span class= "asname">{{ spell[1] }}</span>
+                <span class= "aslevel">{{ spell[2] }}</span>
+                <span class= "ascastime">{{ spell[3] }}</span>
+                <span class= "asdurat">{{ spell[4] }}</span>
+                <span class= "asrange">{{ spell[5] }}</span>
+                <span class= "asdmg">{{ spell[6] }}</span>
+            </a>
         </div>
     {% endfor %}
     </div>
@@ -19,7 +38,7 @@
             input = document.getElementById('myInput'); //taking the input from the search bar
             filter = input.value.toUpperCase(); //making the intput case insensitive
             spellsraw = document.getElementById("spells") //getting information from the wanted div
-            spells = spellsraw.getElementsByClassName("spell") //extracting contents, shoving them into a 'list'
+            spells = spellsraw.getElementsByClassName("spelllink") //extracting contents, shoving them into a 'list'
             for (i = 0; i < spells.length; i++ ){ //looping through the list of contents
                 spell = spells[i] //picking out the data for each iteration
                 txtvalue = spell.innerHTML //getting the actual text from the div

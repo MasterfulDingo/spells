@@ -1,23 +1,35 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
+    <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells by name...">
+
     {% for field in entfields %}
-        <select name={{field}} id="spellselect" method="POST" action="/about" onselect="filterfunc()">
-            <option value={{field[0]}} selected>{{field[0]}}</option>
+        <select name={{field[0]}} class="spellselect" method="POST" action="/about" onchange="filterfunc()">
+            <option value="" disabled selected style="display:none;">{{field[0]}}</option>
             {% for term in field[1:] %}
-                <option value={{field}}>{{term}}</option>
+                <option value={{term}}>{{term}}</option>
             {% endfor %}
         </select>
     {% endfor %}
+    <select id="mySelect" onchange="myFunction()">
+        <option>Apple</option>
+        <option>Orange</option>
+        <option>Pineapple</option>
+        <option>Banana</option>
+    </select>
     
     <div class="spellfields">
-        <span class= "asname">Name</span>
-        <span class= "aslevel">Level</span>
-        <span class= "ascastime">Casting time</span>
-        <span class= "asdurat">Duration</span>
-        <span class= "asrange">Range</span>
-        <span class= "asdmg">Damage</span>
+        <span class="asname">Name</span>
+        <span class="aslevel">Level</span>
+        <span class="ascastime">Casting time</span>
+        <span class="asdurat">Duration</span>
+        <span class="asrange">Range</span>
+        <span class="asdmg">Damage</span>
     </div>
+
+
+    <div id="spells">
     {% for spell in spells %}
         <div class="spelllink">
             <a href="spell/{{ spell[0] }}">
@@ -30,13 +42,37 @@
             </a>
         </div>
     {% endfor %}
-
+    </div>
 <script>
     function filterfunc() {
-        document.getElementById("spellselect").selectedindex = "1";
+        var x = document.getElementsByClassName("spellselect");
+        console.log(x)
+        console.log(document.getElementsByClassName("spellselect").selectedindex)
+        document.getElementsByClassName("spellselect").value = "";
+        
+    }
+    function myFunction(){
+        document.getElementById("mySelect").selectedindex = "0";
     }
 
 
+    function searchfilter() {
+        var input, filter, spellsraw, spells, spell, i, txtValue //defining variables
+        input = document.getElementById('myInput'); //taking the input from the search bar
+        filter = input.value.toUpperCase(); //making the intput case insensitive
+        spellsraw = document.getElementById("spells") //getting information from the wanted div
+        spells = spellsraw.getElementsByClassName("spelllink") //extracting contents, shoving them into a 'list'
+        console.log(spellsraw)
+        for (i = 0; i < spells.length; i++ ){ //looping through the list of contents
+            spell = spells[i] //picking out the data for each iteration
+            txtvalue = spell.innerHTML //getting the actual text from the div
+            if (txtvalue.toUpperCase().indexOf(filter) > -1){ //if the filter string exists in the div text,
+                spells[i].style.display = ""; //let the div be
+            } else { //if not,
+                spells[i].style.display = "none"; //hide it from sight!
+            }
+        }
+    } //ooh curly closing brackets! why did i decide to use Javascript again?
 </script>
 
 {% endblock content %}

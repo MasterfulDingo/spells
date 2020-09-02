@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask, render_template, url_for, redirect, request, make_response
+from flask_sqlalchemy import SQLAlchemy
 from forms import SpellSearchForm
 import json
 
@@ -13,21 +14,21 @@ entfields = [['level','0','1','2','3','4','5','6','7','8','9'],['school','abjura
 @app.route("/")
 @app.route("/home") #either of these will return user to the correct site
 def hello():
-    return render_template('home.html') #runs 
+    return render_template('home.html') #returns the home html file
 
 @app.route('/all_spells')
 def all_spells():
-    sql = "SELECT spell.id, spell.name, spell.level, castingtime.name, duration.name, range.name, spell.damage FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN duration ON duration.id = spell.duration"
-    single = False
-    results = db_func(sql,single)
+    sql = "SELECT spell.id, spell.name, spell.level, castingtime.name, duration.name, range.name, spell.damage FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN duration ON duration.id = spell.duration" #sql used to gather information for this page
+    single = False #we want a list of results, not just the top one
+    spells = db_func(sql,single) #sending the sql to my sql function
 
-    return render_template('all_spells.html', spells=results, entfields=entfields)
+    return render_template('all_spells.html', spells=spells, entfields=entfields) #returns template with data to be presented
 
-@app.route('/spell/<path:id>') #while there is a slight risk of people being able to do nasty things by sticking sql on the end of the link, i'm not sure how to counter it, so i'll leave it for now.
+@app.route('/spell/<id>') #while there is a slight risk of people being able to do nasty things by sticking sql on the end of the link, i'm not sure how to counter it, so i'll leave it for now.
 def spell(id):
     sql = "SELECT spell.id, spell.name, spell.description, spell.level, spell.components, spell.concentration, spell.ritual, spell.damage, range.name, duration.name, castingtime.name, school.name FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN duration ON duration.id = spell.duration INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN school ON school.id = spell.school WHERE spell.id == {}".format(id) #the sql query, complete with joins. the format inserts the id of the spell in the database, and therefore returns all relevant information about it for the page.
     single = True #only want one result
-    spell = db_func(sql,single) #runs the sql command, and turns the resultant tuple into a list to allow later formatting
+    spell = db_func(sql,single) #runs the sql command
     if spell == False:
         return render_template('404.html'), 404 #if the data is not in the database, the page cannot be created, so return 404 error
     spell[2] = spell[2].split('\n') #splits up the description by python spaces, so it can be properly formatted with flask, as the python was not being picked up by the html side.
@@ -44,11 +45,17 @@ def about(): #the function itself
 
     return render_template('about.html', entfields=entfields, spellnames=spellnames) #returns the template normally
 
-@app.route('/search')
+@app.route('/search', methods=('GET','POST'))
 def search():
-    sql = "SELECT spell.id, spell.name FROM spell" 
-    spellnames = db_func(sql,single=False)
-    return render_template('search.html', entfields = entfields, spellnames = spellnames)
+    sql = "SELECT spell.id, spell.name, spell.level, castingtime.name, duration.name, range.name, spell.damage FROM spell INNER JOIN range ON range.id = spell.range INNER JOIN castingtime ON castingtime.id = spell.castingtime INNER JOIN duration ON duration.id = spell.duration" #!!!!!! MOVE THIS BEHIND THE IF STATEMENT !!!!!
+    spells = db_func(sql,single=False)
+    if request.method == 'POST':
+        var = request.form.getlist('param')
+        sql = filtermfunc(var)
+        spells = db_func(sql, single=Flase)
+        return render_template('search.html', entfields=entfields, spells=spells, var=var)
+
+    return render_template('search.html', entfields=entfields, spells=spells)
 
 @app.errorhandler(404) #note that I have explicitly stated that this route is related to the 404 error, and i am using the errorhandler function, not the route function
 def page_not_found(e):
@@ -59,9 +66,10 @@ def db_func(sql,single):
     cur=conn.cursor() #creates cursor
     cur.execute(sql) #executes the sql command required with the cursor
     try: #if the data called for is not in the database, an error will occur ("Nonetype" is not iterable). this try/except statement catches the error when it is throw up, and returns a "false" so the original function can return a 404 errorpage.
+        
         if single == True: #returns a single tuple if that is all that is required, and turns it into a list
             result = cur.fetchone()
-            result = list(result)
+            result = list(result) #converts tupme to list
         else: #returns a list of tuples, which are then turned into lists
             result = cur.fetchall()
             for i in range(len(result)):
@@ -74,6 +82,9 @@ def db_func(sql,single):
     conn.close
     return result
 
+
+def filtermfunc(filterraw):
+    return True
 
 if __name__ == "__main__":
     app.run(debug=True)
