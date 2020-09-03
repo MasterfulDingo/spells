@@ -51,8 +51,9 @@ def search():
     spells = db_func(sql,single=False)
     if request.method == 'POST':
         var = request.form.getlist('param')
-        sql = filtermfunc(var)
-        spells = db_func(sql, single=Flase)
+        sqlparams = filtermfunc(var)
+        sql = "{} {}".format(sql,sqlparams)
+        spells = db_func(sql, single=False)
         return render_template('search.html', entfields=entfields, spells=spells, var=var)
 
     return render_template('search.html', entfields=entfields, spells=spells)
@@ -64,12 +65,11 @@ def page_not_found(e):
 def db_func(sql,single):
     conn=sqlite3.connect("spells.db") #connects to database
     cur=conn.cursor() #creates cursor
-    cur.execute(sql) #executes the sql command required with the cursor
     try: #if the data called for is not in the database, an error will occur ("Nonetype" is not iterable). this try/except statement catches the error when it is throw up, and returns a "false" so the original function can return a 404 errorpage.
-        
+        cur.execute(sql) #executes the sql command required with the cursor
         if single == True: #returns a single tuple if that is all that is required, and turns it into a list
             result = cur.fetchone()
-            result = list(result) #converts tupme to list
+            result = list(result) #converts tuple to list
         else: #returns a list of tuples, which are then turned into lists
             result = cur.fetchall()
             for i in range(len(result)):
@@ -84,7 +84,23 @@ def db_func(sql,single):
 
 
 def filtermfunc(filterraw):
-    return True
+    sql = []
+    for term in filterraw:
+        term = term.split("_")
+        if term[0] == "school":
+            for school in entfields[1]:
+                if term[1] == school:
+                    term[1] = entfields[1].index(term[1])
+        elif term[0] == "concentration" or term[0] == "ritual":
+            if term[1] == "no":
+                term[1] = "0"
+            elif term[1] == "yes":
+                term[1] = "1"
+        paramsingle = "spell.{} = {}".format(term[0],term[1])
+        sql.append(paramsingle)
+    sqlstring = str(" AND ".join(sql))
+    sqlstring = " WHERE {}".format(sqlstring)
+    return sqlstring
 
 if __name__ == "__main__":
     app.run(debug=True)
