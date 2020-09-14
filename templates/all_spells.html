@@ -2,25 +2,14 @@
 
 {% block content %}
 
-    <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells by name...">
+    
 
-    {% for field in entfields %}
-        <select name={{field[0]}} class="spellselect" method="POST" action="/about" onchange="filterfunc()">
-            <option value="" disabled selected style="display:none;">{{field[0]}}</option>
-            {% for term in field[1:] %}
-                <option value={{term}}>{{term}}</option>
-            {% endfor %}
-        </select>
-    {% endfor %}
-    <select id="mySelect" onchange="myFunction()">
-        <option>Apple</option>
-        <option>Orange</option>
-        <option>Pineapple</option>
-        <option>Banana</option>
-    </select>
+
     
     <div class="spellfields">
-        <span class="asname">Name</span>
+        <span class="asname">
+            <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells by name...">
+        </span>
         <span class="aslevel">Level</span>
         <span class="ascastime">Casting time</span>
         <span class="asdurat">Duration</span>
