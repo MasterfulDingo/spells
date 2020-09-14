@@ -42,7 +42,7 @@
                 spell = spells[i] //picking out the data for each iteration
                 txtvalue = spell.innerHTML //getting the actual text from the div
                 if (txtvalue.toUpperCase().indexOf(filter) > -1){ //if the filter string exists in the div text,
-                    spells[i].style.display = ""; //let the div be
+                    spells[i].style.display = ""; //leave the div be
                 } else { //if not,
                     spells[i].style.display = "none"; //hide it from sight!
                 }
