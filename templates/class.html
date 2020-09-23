@@ -1,21 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>{{ caster[0] }}</h2>
+    <h2>{{ caster[0] }}</h2> <!-- letting the user know what caster they are looking at -->
     {{ caster[1] }}
     <br>
     <div id="spells">
-        {% for spell in spells %}
-            <div class="spelllink">
-                <a href="spell/{{ spell[0] }}">
-                    <span class= "asname">{{ spell[1] }}</span>
-                    <span class= "aslevel">{{ spell[2] }}</span>
-                    <span class= "ascastime">{{ spell[3] }}</span>
-                    <span class= "asdurat">{{ spell[4] }}</span>
-                    <span class= "asrange">{{ spell[5] }}</span>
-                    <span class= "asdmg">{{ spell[6] }}</span>
-                </a>
-            </div>
-        {% endfor %}
+    {% for spell in spells %}
+        <div class="spelllink"> <!-- these spells are the ones tagged as being able to be cast by the searched class -->
+            <a href="spell/{{ spell[0] }}">
+                <span class= "asname">{{ spell[1] }}</span>
+                <span class= "aslevel">{{ spell[2] }}</span>
+                <span class= "ascastime">{{ spell[3] }}</span>
+                <span class= "asdurat">{{ spell[4] }}</span>
+                <span class= "asrange">{{ spell[5] }}</span>
+                <span class= "asdmg">{{ spell[6] }}</span>
+            </a>
         </div>
+    {% endfor %}
+    </div>
 {% endblock content %}

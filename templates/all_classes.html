@@ -7,7 +7,7 @@
             <a href="/class/{{ caster[1]|lower }}">{{  caster[1]  }}</a></h2> 
             <!-- the above link uses the flask function |lower to take the capitalised entry from the database and make it compatible with the formatting for the urls  -->
         <br>
-        {{ caster[2] }}
+        <p>{{ caster[2] }}</p> <!-- description of the selected class -->
     {% endfor %}
 
 {% endblock content %}

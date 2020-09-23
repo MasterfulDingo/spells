@@ -2,24 +2,24 @@
 
 {% block content %}
 
-    <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells...">
-    <form method="POST" action="/search">
+    <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells..."> <!-- making a text input which calls the javascript function each time a key is released -->
+    <form method="POST" action="/search"> <!-- defining the form area for the form to gather data from -->
         {% for field in entfields %}
-            <p>{{ field[0] }}</p>
-            {% for term in field[1:] %}
+            <p>{{ field[0] }}</p> <!-- printing the field being searched -->
+            {% for term in field[1:] %} <!-- making checkboxes for the values in the searched field. -->
                 <input type="checkbox" name="param" value="{{field[0]}}_{{term}}">
                 <label for={{term}}>{{ term }}</label>
             {% endfor %}
         {% endfor %}
         <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit"> 
     </form>
 
-    <div id="spells">
+    <div id="spells"> 
     {% for spell in spells %}
-        <div class="spelllink">
-            <a href="spell/{{ spell[0] }}">
-                <span class= "asname">{{ spell[1] }}</span>
+        <div class="spelllink"><!-- this div is what I use to format the clean hover effect for most spells  -->
+            <a href="spell/{{ spell[0] }}"> <!-- links to the page with the id of the shown spell -->
+                <span class= "asname">{{ spell[1] }}</span> <!-- each of these spans take up a certain percentage of the screen -->
                 <span class= "aslevel">{{ spell[2] }}</span>
                 <span class= "ascastime">{{ spell[3] }}</span>
                 <span class= "asdurat">{{ spell[4] }}</span>

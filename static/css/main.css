@@ -129,3 +129,44 @@ a:active{
     color: #F6F6F6;
 }
 
+h1{
+    font-family: Modesto;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 6em;
+    line-height: 1px;
+}
+p{
+    font-family: Scaly Sans;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+
+/* these fonts have been recreated from the official fonts used in the D&D rulebooks, under a creative commons license, meaning as long as I am not charging for the use of the fonts I am allowed to use them. They were made specifically for projects like mine. */
+@font-face{
+    font-family: Scaly Sans;
+    src: url(solbera-dnd-fonts-master/Scaly\ Sans/Scaly\ Sans.otf);
+}
+@font-face{
+    font-family: Modesto;
+    src: url(solbera-dnd-fonts-master/Nodesto\ Caps\ Condensed/Nodesto\ Caps\ Condensed.otf);
+}
+@font-face{
+    font-family: Bookinsanity;
+    src: url(solbera-dnd-fonts-master/Bookinsanity/Bookinsanity.otf);
+}
+@font-face{
+    font-family: Mr Eaves;
+    src: url(solbera-dnd-fonts-master/Mr\ Eaves/Mr\ Eaves\ Small\ Caps.otf);
+}
+@font-face{
+    font-family: Scaly Sans Caps;
+    src:url(solbera-dnd-fonts-master/Scaly\ Sans\ Caps/Scaly\ Sans\ Caps.otf)
+}
+@font-face{
+    font-family: Zatanna Misdirection;
+    src:url(solbera-dnd-fonts-master/Zatanna\ Misdirection/Zatanna\ Misdirection.otf)
+}
