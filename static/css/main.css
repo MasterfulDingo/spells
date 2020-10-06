@@ -18,6 +18,31 @@
 .navbar a:hover{
     background-color: #B90504;
 }
+
+
+.classtitle{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    top: 0;
+    width: fit-content;
+}
+.classtitle a{
+
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    float: left;
+}
+.classtitle a:hover{
+    background-color: #B90504;
+}
+
+
+
+
 .active{
     background-color: #990100;
 }
@@ -82,37 +107,42 @@
 
 .asname{
     position: absolute;
-    width: 17%;
+    width: 25%;
 }
 
 .aslevel{
     position: absolute;
-    margin-left: 18%;
+    margin-left: 26%;
     text-align: center;
 }
 
 .ascastime{
     position: absolute;
-    margin-left: 25%;
+    margin-left: 35%;
     text-align: center;
 }
 
 .asdurat{
     position: absolute;
-    margin-left: 37%;
+    margin-left: 50%;
     text-align: center;
 }
 
 .asrange{
     position: absolute;
-    margin-left: 52%;
+    margin-left: 67%;
     text-align: center;
 }
 
 .asdmg{
-    margin-left: 75%;
+    margin-left: 87%;
     text-align: center;
 }
+
+
+
+
+
 
 
 
@@ -136,6 +166,15 @@ h1{
     font-size: 6em;
     line-height: 1px;
 }
+
+h2{
+    font-family: Modesto;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 4em;
+    line-height: 0px;
+}
+
 p{
     font-family: Scaly Sans;
     font-weight: 400;

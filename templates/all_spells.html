@@ -33,16 +33,6 @@
     {% endfor %}
     </div>
 <script>
-    function filterfunc() {
-        var x = document.getElementsByClassName("spellselect");
-        console.log(x)
-        console.log(document.getElementsByClassName("spellselect").selectedindex)
-        document.getElementsByClassName("spellselect").value = "";
-        
-    }
-    function myFunction(){
-        document.getElementById("mySelect").selectedindex = "0";
-    }
 
 
     function searchfilter() {
@@ -51,10 +41,10 @@
         filter = input.value.toUpperCase(); //making the intput case insensitive
         spellsraw = document.getElementById("spells") //getting information from the wanted div
         spells = spellsraw.getElementsByClassName("spelllink") //extracting contents, shoving them into a 'list'
-        console.log(spellsraw)
         for (i = 0; i < spells.length; i++ ){ //looping through the list of contents
             spell = spells[i] //picking out the data for each iteration
-            txtvalue = spell.innerHTML //getting the actual text from the div
+            spell1 = spell.getElementsByClassName("asname") // getting the correct div so it doesn't compare the filter term to the text from all of the spans, only the span "asname"
+            txtvalue = spell1[0].innerHTML //getting the actual text from the div
             if (txtvalue.toUpperCase().indexOf(filter) > -1){ //if the filter string exists in the div text,
                 spells[i].style.display = ""; //let the div be
             } else { //if not,

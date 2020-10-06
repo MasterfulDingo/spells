@@ -17,7 +17,7 @@
 
     <div id="spells"> 
     {% for spell in spells %}
-        <div class="spelllink"><!-- this div is what I use to format the clean hover effect for most spells  -->
+        <div class="spelllink"><!-- this div is what I use to format the clean hover effect for spells  -->
             <a href="spell/{{ spell[0] }}"> <!-- links to the page with the id of the shown spell -->
                 <span class= "asname">{{ spell[1] }}</span> <!-- each of these spans take up a certain percentage of the screen -->
                 <span class= "aslevel">{{ spell[2] }}</span>
