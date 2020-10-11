@@ -1,5 +1,5 @@
 
-
+/* css for navbar, giving it hover effects to highlight what the user is mousing over and making it look nice. */
 .navbar{
     margin: 0;
     padding: 0;
@@ -20,6 +20,7 @@
 }
 
 
+/* some css for my classes page, creating styled links. */
 .classtitle{
     margin: 0;
     padding: 0;
@@ -29,7 +30,6 @@
     width: fit-content;
 }
 .classtitle a{
-
     padding-left: 10px;
     padding-right: 10px;
     text-align: center;
@@ -41,11 +41,13 @@
 }
 
 
-
-
+/* if a link is active, it's background colour will be set as shown below */
 .active{
     background-color: #990100;
 }
+
+
+/* styling the header partition of the spell pages. this is similar to the spelllink div, but isn't a link. */
 .spellfields{
     margin: 5px;
     padding: 14px 16px;
@@ -55,36 +57,17 @@
     width: 90%;
     display: block;
     margin-left: 5%;
-    margin-right: 5%;
+    /* margin-right: 5%; */
     margin-bottom: 20px;
     margin-top: 15px;
     color: #F6F6F6;
 
 }
 
-.spell{
-    margin: 5px;
-    overflow: hidden;
-    background-color: #333333;
-    align-self: center;
-    width: 90%;
-    display: block;
-    margin-left: 5%;
-}
-.spell a{
-    padding: 14px 16px;
-    text-align: left;
-    text-decoration: none;
-    float: left;
-    width: 100%;
-}
-.spell a:hover{
-    background-color: #B90504;
-}
 
+/* making the divs for spell links on the search pages look nice, taking up a set amound of the screen and having a hover effect. */
 .spelllink{
     margin: 5px;
-
     overflow: hidden;
     background-color: #333333;
     align-self: center;
@@ -92,7 +75,6 @@
     display: block;
     margin-left: 5%;
 }
-
 .spelllink a{
     padding: 14px 16px;
     text-align: left;
@@ -100,57 +82,48 @@
     float: left;
     width: 100%;
 }
-
 .spelllink a:hover{
     background-color: #B90504;
 }
 
+
+/* setting the widths of spans for the presentation of spell data in the search pages. */
 .asname{
     position: absolute;
     width: 25%;
 }
-
 .aslevel{
     position: absolute;
     margin-left: 26%;
     text-align: center;
 }
-
 .ascastime{
     position: absolute;
     margin-left: 35%;
     text-align: center;
 }
-
 .asdurat{
     position: absolute;
     margin-left: 50%;
     text-align: center;
 }
-
 .asrange{
     position: absolute;
     margin-left: 67%;
     text-align: center;
 }
-
 .asdmg{
     margin-left: 87%;
     text-align: center;
 }
 
 
-
-
-
-
-
-
+/* defining colours for hyperlinks on the site */
 a:link{
-    color:#F6F6F6;
+    color: #F6F6F6;
 }
 a:visited{
-    color:#F6F6F6;
+    color: #F6F6F6;
 }
 a:hover{
     color: #F6F6F6;
@@ -159,6 +132,8 @@ a:active{
     color: #F6F6F6;
 }
 
+
+/* defining fonts for various text types */
 h1{
     font-family: Modesto;
     font-weight: normal;
@@ -166,7 +141,6 @@ h1{
     font-size: 6em;
     line-height: 1px;
 }
-
 h2{
     font-family: Modesto;
     font-weight: normal;
@@ -174,7 +148,6 @@ h2{
     font-size: 4em;
     line-height: 0px;
 }
-
 p{
     font-family: Scaly Sans;
     font-weight: 400;
@@ -182,6 +155,15 @@ p{
 }
 
 
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #990100;
+    color: #F6F6F6;
+    text-align: center;
+}
 
 
 /* these fonts have been recreated from the official fonts used in the D&D rulebooks, under a creative commons license, meaning as long as I am not charging for the use of the fonts I am allowed to use them. They were made specifically for projects like mine. */

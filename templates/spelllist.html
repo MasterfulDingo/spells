@@ -1,0 +1,55 @@
+{# this file essentially compiles everything needed to present a list of spells returned from the database as links, and to search them with dynamic javascript. #}
+
+{% block spells %}
+<div class="spellfields">
+    <span class="asname">
+        <input type="text" id="myInput" onkeyup="searchfilter()" placeholder="Search for spells by name..."> {# this line creates the text input, and then sends whatever is in the search field to the javascript function when a key is released. #}
+    </span>
+    <span class="aslevel">Level</span>
+    <span class="ascastime">Casting time</span>
+    <span class="asdurat">Duration</span>
+    <span class="asrange">Range</span>
+    <span class="asdmg">Damage</span>
+</div>
+
+
+<div id="spells"> {# iterates over all of the returned lists from the server and places the information found into the following spans and linking the whole thing to the spell's page. #}
+{% for spell in spells %}
+    <div class="spelllink">
+        <a href="spell/{{ spell[0] }}">
+            <span class= "asname">{{ spell[1] }}</span>
+            <span class= "aslevel">{{ spell[2] }}</span>
+            <span class= "ascastime">{{ spell[3] }}</span>
+            <span class= "asdurat">{{ spell[4] }}</span>
+            <span class= "asrange">{{ spell[5] }}</span>
+            <span class= "asdmg">{{ spell[6] }}</span>
+        </a>
+    </div>
+{% endfor %}
+<br>
+<br>
+<br>
+<br>
+</div>
+
+{# this script is activated by the text input earlier in the file, and takes an input from that to compare it to each item in the div "spelllink". #}
+<script> 
+function searchfilter() {
+    var input, filter, spellsraw, spells, spell, i, txtValue //defining variables
+    input = document.getElementById('myInput'); //taking the input from the search bar
+    filter = input.value.toUpperCase(); //making the intput case insensitive
+    spellsraw = document.getElementById("spells") //getting information from the wanted div
+    spells = spellsraw.getElementsByClassName("spelllink") //extracting contents, shoving them into a 'list'
+    for (i = 0; i < spells.length; i++ ){ //looping through the list of contents
+        spell = spells[i] //picking out the data for each iteration
+        spell1 = spell.getElementsByClassName("asname") // getting the correct div so it doesn't compare the filter term to the text from all of the spans, only the span "asname"
+        txtvalue = spell1[0].innerHTML //getting the actual text from the div
+        if (txtvalue.toUpperCase().indexOf(filter) > -1){ //if the filter string exists in the div text,
+            spells[i].style.display = ""; //let the div be
+        } else { //if not,
+            spells[i].style.display = "none"; //hide it from sight!
+        }
+    }
+} //ooh curly closing brackets! why did i decide to use Javascript again?
+</script>
+{% endblock spells %}

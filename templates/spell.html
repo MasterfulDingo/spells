@@ -3,34 +3,39 @@
 {% block content %}
 <div id="content">
     <h2>
-        {{ spell[1] }} 
-        {% if spell[6] == 1 %}
+        {{ spell[1] }} {# spell name #}
+        {% if spell[6] == 1 %} {# if it's a ritual, says so #}
             (Ritual)
         {% endif %}
     </h2>
 
-    {% if spell[3] == 0 %}
+    {# this states the level and school of magic for the spell #}
+    {% if spell[3] == 0 %} {# level 0 spells are also known as cantrips #}
         A {{ spell[11]}} cantrip
     {% else %}
-        A level {{ spell[3] }} {{ spell[11] }}
+        A level {{ spell[3] }} {{ spell[11] }} 
     {% endif %}
     
     <br>
-    components: {{ spell[4] }} <br>
+    {# these detail the components, range, duration, and casting time of the spell. #}
+    components: {{ spell[4] }} <br> 
     range: {{ spell[8] }} <br>
     duration: 
-    {% if spell[5] == 1 %}
-        up to 
-    {% endif %}
-    {{ spell[9] }} 
-    {% if spell[5] == 1 %}
-        (concentration)
+    {% if spell[5] == 1 %} {# takes into account concentration, a mechanic where spells can end early #}
+        up to {{ spell[9] }} (concentration)
+    {% else %}
+        {{ spell[9] }}
     {% endif %}
     <br>
-    casting time: {{ spell[10] }} <br>
+    casting time: {{ spell[10] }} 
     <br>
-    {% for para in spell[2] %}
+    <br>
+    {% for para in spell[2] %} {# displays the split text block in paragraphs. #}
         {{ para }}<br>
     {% endfor %}
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 {% endblock content %}
