@@ -9,12 +9,14 @@
     top: 0;
     width: 100%;
 }
+
 .navbar a{
     padding: 14px 16px;
     text-align: center;
     text-decoration: none;
     float: left;
 }
+
 .navbar a:hover{
     background-color: #B90504;
 }
@@ -28,7 +30,9 @@
     background-color: #333333;
     top: 0;
     width: fit-content;
+    word-wrap: break-word;
 }
+
 .classtitle a{
     padding-left: 10px;
     padding-right: 10px;
@@ -36,6 +40,7 @@
     text-decoration: none;
     float: left;
 }
+
 .classtitle a:hover{
     background-color: #B90504;
 }
@@ -75,6 +80,7 @@
     display: block;
     margin-left: 5%;
 }
+
 .spelllink a{
     padding: 14px 16px;
     text-align: left;
@@ -82,6 +88,7 @@
     float: left;
     width: 100%;
 }
+
 .spelllink a:hover{
     background-color: #B90504;
 }
@@ -92,26 +99,31 @@
     position: absolute;
     width: 25%;
 }
+
 .aslevel{
     position: absolute;
     margin-left: 26%;
     text-align: center;
 }
+
 .ascastime{
     position: absolute;
     margin-left: 35%;
     text-align: center;
 }
+
 .asdurat{
     position: absolute;
     margin-left: 50%;
     text-align: center;
 }
+
 .asrange{
     position: absolute;
     margin-left: 67%;
     text-align: center;
 }
+
 .asdmg{
     margin-left: 87%;
     text-align: center;
@@ -122,12 +134,15 @@
 a:link{
     color: #F6F6F6;
 }
+
 a:visited{
     color: #F6F6F6;
 }
+
 a:hover{
     color: #F6F6F6;
 }
+
 a:active{
     color: #F6F6F6;
 }
@@ -141,6 +156,7 @@ h1{
     font-size: 6em;
     line-height: 1px;
 }
+
 h2{
     font-family: Modesto;
     font-weight: normal;
@@ -148,6 +164,7 @@ h2{
     font-size: 4em;
     line-height: 0px;
 }
+
 p{
     font-family: Scaly Sans;
     font-weight: 400;
@@ -155,6 +172,31 @@ p{
 }
 
 
+/* some css for the button for each class in the classes page */
+.classtitle{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    top: 0;
+    width: fit-content;
+}
+
+.classtitle a{
+
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    float: left;
+}
+
+.classtitle a:hover{
+    background-color: #B90504;
+}
+
+
+/* making the footer look nice and stand out, so that users will read the important legal disclaimer on it */
 .footer{
     position: fixed;
     left: 0;
@@ -167,27 +209,32 @@ p{
 
 
 /* these fonts have been recreated from the official fonts used in the D&D rulebooks, under a creative commons license, meaning as long as I am not charging for the use of the fonts I am allowed to use them. They were made specifically for projects like mine. */
-@font-face{
+@font-face {
     font-family: Scaly Sans;
     src: url(solbera-dnd-fonts-master/Scaly\ Sans/Scaly\ Sans.otf);
 }
-@font-face{
+
+@font-face {
     font-family: Modesto;
     src: url(solbera-dnd-fonts-master/Nodesto\ Caps\ Condensed/Nodesto\ Caps\ Condensed.otf);
 }
-@font-face{
+
+@font-face {
     font-family: Bookinsanity;
     src: url(solbera-dnd-fonts-master/Bookinsanity/Bookinsanity.otf);
 }
-@font-face{
+
+@font-face {
     font-family: Mr Eaves;
     src: url(solbera-dnd-fonts-master/Mr\ Eaves/Mr\ Eaves\ Small\ Caps.otf);
 }
-@font-face{
+
+@font-face {
     font-family: Scaly Sans Caps;
     src:url(solbera-dnd-fonts-master/Scaly\ Sans\ Caps/Scaly\ Sans\ Caps.otf)
 }
-@font-face{
+
+@font-face {
     font-family: Zatanna Misdirection;
     src:url(solbera-dnd-fonts-master/Zatanna\ Misdirection/Zatanna\ Misdirection.otf)
 }
